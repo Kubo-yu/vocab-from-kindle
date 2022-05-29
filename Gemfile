@@ -47,6 +47,9 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+	gem 'rubocop', '~> 1.12', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
@@ -63,6 +66,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # 環境変数を扱うために必要なgem
 gem 'dotenv'
 
+# slim
 gem 'slim'
 gem 'html2slim'
 
+# bootstrap
+gem 'bootstrap-sass'
