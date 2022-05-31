@@ -72,3 +72,10 @@ gem 'html2slim'
 
 # bootstrap
 gem 'bootstrap-sass'
+
+gem 'i18n_generators'
+
+gem 'sidekiq'
+gem 'sinatra', require: false
+
+gem 'cleanup'
