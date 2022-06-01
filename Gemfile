@@ -79,3 +79,6 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 
 gem 'cleanup'
+
+# 環境変数を扱うために必要なgem
+gem 'dotenv-rails'
