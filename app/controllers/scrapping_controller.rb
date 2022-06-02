@@ -7,8 +7,17 @@ class ScrappingController < ApplicationController
   def show; end
 
   def new
-    ScrapeVocab.perform_later
+		@scrapping = Scrapping.new
+		@book = Book.new
+		@vocabulary = Vocabulary.new
+		# performのリターンをnewのviewで表示して、それをcreateアクションに送る
+		# BookとVocabularyは繰り返し処理でsaveする
+		ScrapeVocab.perform_later
+
   end
 
-  def create; end
+  def create
+		@scrapping = Scrapping.new(post_params)
+
+	end
 end
