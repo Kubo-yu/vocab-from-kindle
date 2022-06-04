@@ -6,10 +6,16 @@
 # scrapped_at: 								:datatime
 # book_quantity: 							:integer
 # vocabulary_quantity: 				:integer
+# status: 										:integer
 # created_at: 								:datatime
 # updated_at: 								:datatime
 
 class Scrapping < ApplicationRecord
+	enum status: {
+		proccessing: 0,
+		done: 1,
+		faild: 2
+	}
   def self.driver_access
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')

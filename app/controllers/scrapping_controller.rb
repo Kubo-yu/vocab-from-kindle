@@ -10,6 +10,7 @@ class ScrappingController < ApplicationController
 		@scrapping = Scrapping.new
 		@book = Book.new
 		@vocabulary = Vocabulary.new
+		# @scrapping.update(status: 0)
 		# performのリターンをnewのviewで表示して、それをcreateアクションに送る
 		# BookとVocabularyは繰り返し処理でsaveする
 		ScrapeVocab.perform_later
@@ -18,6 +19,5 @@ class ScrappingController < ApplicationController
 
   def create
 		@scrapping = Scrapping.new(post_params)
-
 	end
 end
