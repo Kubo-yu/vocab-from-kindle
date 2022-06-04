@@ -18,6 +18,8 @@ class ScrapeVocab < ApplicationJob
 		select_eng_books(driver)
     p ' yo'
 
+
+
 		driver.quit
   end
 
@@ -51,19 +53,36 @@ class ScrapeVocab < ApplicationJob
 
 		p "#{book_quantity} start seraching book title"
 
-		# book_quantity.times do |timesCount|
-		# 	sleep 1
-		# 	p "#{timesCount} try book title"
-		# 	driver.book_titles[timesCount].click
-		# 	book_title = driver.find_element(:css, 'h3.a-spacing-top-small').text
-		# 	if book_title.match(/\A[ -~]+\z/)
-		# 		# ここで英語の本と判断できれば、もう単語のスクレイピング始めてもいいかも･
-		# 		book_titles.push(book_title)
-		# 	end
-		# end
+		book_quantity.times do |timesCount|
+			sleep 1
+			p "#{timesCount} try book title"
+			driver.book_titles[timesCount].click
+			sleep 1
+			book_title = driver.find_element(:css, 'h3.a-spacing-top-small').text
+			author = driver.find_element(:css, 'p.a-spacing-top-micro').text
+			if book_title.match(/\A[ -~]+\z/)
+				# ここで英語の本と判断できれば、もう単語のスクレイピング始めてもいいかも･
+				book_titles.push(book_title)
+				create_book(book_title, author) if Book.find_by(title: book_title)
+			end
+		end
 
 		# book_titles.each do |book_title|
 		# 	p "#{book_title} was selected"
 		# end
+	end
+
+	def create_book(title, author)
+		book = Book.new(
+			title: title,
+			author: author
+		)
+		if book.valid?
+			book.save!
+		end
+	end
+
+	def collect_vocab
+		
 	end
 end
