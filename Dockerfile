@@ -28,6 +28,7 @@ RUN bundle install
 COPY . /myapp
 
 RUN yarn install --check-files
+RUN yarn add jquery bootstrap @popperjs/core
 RUN bundle exec rails webpacker:compile
 
 # コンテナ起動時に実行させるスクリプトを追加
