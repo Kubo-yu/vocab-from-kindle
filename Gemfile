@@ -82,3 +82,7 @@ gem 'cleanup'
 
 # 環境変数を扱うために必要なgem
 gem 'dotenv-rails'
+
+gem 'aasm'
+
+gem 'roo'
