@@ -1,0 +1,8 @@
+h1
+  | Book#index
+div
+	= form_tag import_books_path, multipart: true do
+		= file_field_tag :file
+		br
+		= submit_tag "インポート", class: 'btn btn-success'
+
