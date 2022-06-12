@@ -12,7 +12,6 @@
 # created_at: 								:datatime
 # updated_at: 								:datatime
 
-
 class Vocabulary < ApplicationRecord
-	belongs_to :book
+  belongs_to :book
 end
