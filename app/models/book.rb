@@ -19,9 +19,9 @@ class Book < ApplicationRecord
 
   def update_vocabulary_quantity(vocabulary_quantity); end
 
-	def self.book_author?(book)
-		author_book = AuthorBook.find_by(book_id: book.id)
-		author = Author.find(author_book.author_id)
-		author.name
-	end
+  def self.book_author?(book)
+    author_book = AuthorBook.find_by(book_id: book.id)
+    author = Author.find(author_book.author_id)
+    author.name
+  end
 end
