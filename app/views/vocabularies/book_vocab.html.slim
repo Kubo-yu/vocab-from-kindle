@@ -1,0 +1,16 @@
+h1
+  | #{@book.title}
+table.table
+  thead
+    tr
+      th Word
+      th Phonics
+      th Definition
+      th Example
+  tbody
+    - @vocabularies.each do |vocabulary|
+      tr
+        td = vocabulary.word
+        td = vocabulary.phonics
+        td = vocabulary.definition
+        td = vocabulary.example

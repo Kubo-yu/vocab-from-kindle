@@ -20,7 +20,5 @@ table.table
         td = book.id
         td = book.title
         td = Book.book_author?(book)
-        td = book.vocabulary_quantity
-        / td = link_to 'Show', user
-        / td = link_to 'Edit', edit_user_path(user)
-        / td = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+        td = link_to "#{book.vocabulary_quantity}", book_vocab_vocabularies_path(book: book), {class: "text-decoration-none"}
+				

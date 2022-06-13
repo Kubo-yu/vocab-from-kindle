@@ -1,0 +1,18 @@
+h1
+  | 単語一覧
+table.table
+  thead
+    tr
+			th Book
+			th Word
+			th Phonics
+			th Definition
+			th Example
+  tbody
+    - @vocabularies.each do |vocabulary|
+      tr
+        td = link_to "#{Vocabulary.book_title?(vocabulary.book_id)}", book_vocab_vocabularies_path(book: vocabulary.book_id), {class: "text-decoration-none"}
+        td = vocabulary.word
+        td = vocabulary.phonics
+        td = vocabulary.definition
+        td = vocabulary.example
