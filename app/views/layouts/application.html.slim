@@ -9,7 +9,25 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .notifications
-      - flash.each do |key, value|
-        = content_tag(:div, value, class: key)
-    = yield
+		nav.navbar.navbar-expand-lg.navbar-light.bg-success
+			a.navbar-brand.text-white[href="#"]
+				| KindleToAnki
+			button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"]
+				span.navbar-toggler-icon
+			#navbarNavAltMarkup.collapse.navbar-collapse
+				= link_to "Home", root_path, {class: "nav-item nav-link text-white"}
+				= link_to "Vocabulary", vocabularies_path, {class: "nav-item nav-link text-white"}
+					/ span.sr-only
+					/ 	| (current)
+					/ a.nav-item.nav-link.text-white[href="#"]
+					/ 	| Features
+					/ a.nav-item.nav-link.text-white[href="#"]
+					/ 	| Pricing
+					/ a.nav-item.nav-link.text-white.disabled[href="#"]
+					/ 	| Disabled
+
+		.notifications
+			- flash.each do |key, value|
+				= content_tag(:div, value, class: key)
+		div.container
+			= yield

@@ -4,9 +4,16 @@ Rails.application.routes.draw do
 
   root 'books#index'
 
-  # post 'books/import', to: 'book#import'
   resources :books do
-    collection { post :import }
+    collection do
+      post :import
+    end
+  end
+
+  resources :vocabularies do
+    collection do
+      get :book_vocab
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

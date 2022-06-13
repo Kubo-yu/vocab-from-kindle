@@ -14,4 +14,9 @@
 
 class Vocabulary < ApplicationRecord
   belongs_to :book
+
+  def self.book_title?(book_id)
+    book = Book.find(book_id)
+    book.title
+  end
 end
