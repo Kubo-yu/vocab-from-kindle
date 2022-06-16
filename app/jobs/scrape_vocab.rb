@@ -3,31 +3,71 @@ class ScrapeVocab < ApplicationJob
 
   queue_as :default
 
-  def perform(*_args)
-    wait = Selenium::WebDriver::Wait.new(timeout: 60)
-
-    driver = Scrapping.driver_access
-    driver.manage.timeouts.implicit_wait = 10
-
-    driver.navigate.to ENV['KINDLE_NOTEBOOK_URL']
-    sleep 10
-
-    login_kindle(driver)
-
-    p ' yo'
+  def perform(book_id)
+    ApplicationRecord.transaction do
+      puts '1'
+			scraping = Scraping.create!(status: 0, book_id: book_id)
+      puts '2'
+      vocabularies = Vocabulary.where(book_id: book_id, definition: nil)
+      puts '3'
+      driver = Scraping.driver_access
+      driver.manage.timeouts.implicit_wait = 10
+      driver.navigate.to ENV['WEBLIO_URL']
+			puts 'set window size'
+			driver.manage.window.resize_to(800,500)
+      sleep 10
+      puts '4'
+      vocabularies.each do |vocabulary|
+        puts "start #{vocabulary}"
+        search(driver, vocabulary)
+        sleep 3
+        definition, phonics = get_definition_and_phonics(driver, vocabulary)
+        vocabulary.update!(definition: definition, phonics: phonics, scraping_id: scraping.id)
+        puts "done #{vocabulary}"
+      end
+      puts '10'
+      scraping.update!(status: 1)
+      puts 'done!'
+    end
   end
 
-  # メール、パスワード入力してログイン
-  def login_kindle(driver, wait)
-    # ログインボタンが表示されるまで待機
-    wait.until { driver.find_element(:id, 'signInSubmit').displayed? }
+  private
 
-    email_input = driver.find_element(:id, 'ap_email')
-    pass_input = driver.find_element(:id, 'ap_password')
+  def search(driver, vocabulary)
+    puts "5 #{vocabulary.word}"
+    search_button = driver.find_element(:class_name, 'formButton')
+    word_input = driver.find_element(:class_name, 'formBoxITxt')
+    word = vocabulary.word
+    puts "6 #{word}"
+    word_input.send_keys(word)
+    sleep 1
+    search_button.click
+    sleep 1
+  end
 
-    email_input.send_keys(ENV['KINDLE_NOTEBOOK_USER'])
-    pass_input.send_keys(ENV['KINDLE_NOTEBOOK_PASS'])
+  def get_definition_and_phonics(driver, vocabulary)
+    sleep 1
+    puts "7 #{vocabulary.word}"
+    definition = unless driver.find_elements(:css, '.content-explanation.ej').empty?
+                   puts "8.5 #{vocabulary.word}"
+                   driver.find_element(:css, '.content-explanation.ej').text
+                 else
+                   'not found'
+                 end
+    sleep 1
+    puts "8 #{definition}"
+    phonics = unless driver.find_elements(:class_name, 'phoneticEjjeDesc').empty?
+								puts "8.5 #{vocabulary.word}"
+                phonics = driver.find_element(:class_name, 'phoneticEjjeDesc').text
+              else
+                'not found'
+              end
+    puts "9 #{phonics}"
+    claer_input(driver)
+    [definition, phonics]
+  end
 
-    driver.find_element(:id, 'signInSubmit').click
+  def claer_input(driver)
+    driver.find_element(:class_name, 'formBoxITxt').clear
   end
 end

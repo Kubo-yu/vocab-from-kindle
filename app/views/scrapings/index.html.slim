@@ -1,0 +1,14 @@
+h1
+  | スクレイピング一覧
+table.table
+  thead
+    tr
+			th Book
+			th Scraped At
+			th Status
+  tbody
+		- @scrapings.each do |scraping|
+			tr
+				td = Book.find(scraping.book_id).title
+				td = I18n.l(scraping.created_at)
+				td = scraping.status
