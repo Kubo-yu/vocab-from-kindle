@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       post :import
+      post :scrape
     end
   end
 
@@ -15,5 +16,7 @@ Rails.application.routes.draw do
       get :book_vocab
     end
   end
+
+  resources :scrapings
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

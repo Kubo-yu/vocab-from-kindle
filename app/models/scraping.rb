@@ -1,15 +1,23 @@
 # == Schema Information
 
-# Table: scrappings
+# Table: scrapings
 
 # id													:bigint
-# scrapped_at: 								:datatime
-# book_quantity: 							:integer
 # vocabulary_quantity: 				:integer
+# status:                     :integer
+# book_id:                     :integer
 # created_at: 								:datatime
 # updated_at: 								:datatime
 
-class Scrapping < ApplicationRecord
+class Scraping < ApplicationRecord
+  belongs_to :book
+
+  enum status: {
+    proccessing: 0,
+    done: 1,
+    failed: 2
+  }
+
   def self.driver_access
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')

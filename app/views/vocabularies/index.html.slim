@@ -11,7 +11,7 @@ table.table
   tbody
     - @vocabularies.each do |vocabulary|
       tr
-        td = link_to "#{Vocabulary.book_title?(vocabulary.book_id)}", book_vocab_vocabularies_path(book: vocabulary.book_id), {class: "text-decoration-none"}
+        td = link_to "#{Book.book_title?(vocabulary.book_id)}", book_vocab_vocabularies_path(book: vocabulary.book_id), {class: "text-decoration-none"}
         td = vocabulary.word
         td = vocabulary.phonics
         td = vocabulary.definition

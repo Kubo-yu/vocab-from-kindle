@@ -16,4 +16,10 @@ class BooksController < ApplicationController
     Import::ImportCsv.import(params[:file])
     redirect_to root_url, notice: '本のインポートが完了しました'
   end
+
+  def scrape
+    book_id = params[:book_id]
+    ScrapeVocab.perform_later(book_id)
+    redirect_to root_url, notice: 'スクレイピングを開始しました'
+  end
 end

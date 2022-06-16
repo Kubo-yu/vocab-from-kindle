@@ -13,7 +13,6 @@ module Import
       book = Book.find_or_create_by!(title: title)
       author = Author.find_or_create_by!(name: author)
       AuthorBook.find_or_create_by!(book_id: book.id, author_id: author.id)
-
       # vocab作成
       csv.each_slice(2).with_index do |rows, index|
         if index >= vocabulary_rows
@@ -37,6 +36,8 @@ module Import
           end
         end
       end
+      vocabulary_quantity = Vocabulary.where(book_id: book.id).count
+      book.update!(vocabulary_quantity: vocabulary_quantity)
     end
   end
 end
