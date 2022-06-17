@@ -8,6 +8,7 @@ table.table
 			th Phonics
 			th Definition
 			th Example
+			th Edit
   tbody
     - @vocabularies.each do |vocabulary|
       tr
@@ -16,3 +17,4 @@ table.table
         td = vocabulary.phonics
         td = vocabulary.definition
         td = vocabulary.example
+        td = button_to 'Edit', edit_vocabulary_path(vocabulary), method: :get, params: { vocabulary: vocabulary }, class: 'btn btn-success'

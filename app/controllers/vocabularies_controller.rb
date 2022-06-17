@@ -7,10 +7,27 @@ class VocabulariesController < ApplicationController
 
   def new; end
 
-  def show; end
+  def edit
+    @vocabulary = Vocabulary.find(params[:vocabulary])
+  end
+
+  def update
+		@vocabulary = Vocabulary.find(params[:id])
+    if @vocabulary.update!(vocabulary_params)
+      redirect_to vocabularies_path, notice: '保存に成功しました'
+    else
+      render :edit, alter: '保存に失敗しました'
+    end
+  end
 
   def book_vocab
     @book = Book.find(params[:book])
     @vocabularies = Vocabulary.where(book_id: @book.id)
+  end
+
+	private
+
+  def vocabulary_params
+    params.require(:vocabular).permit(:word, :phonics, :definition, :example)
   end
 end
