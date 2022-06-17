@@ -1,0 +1,18 @@
+h1
+  | 単語編集
+div.form-group
+	= form_with model: @vocabulary do |f|
+		div.form-group
+			= f.label 'Word'
+			= f.text_field :word, class: 'form-control'
+		div.form-group
+			= f.label 'Phonics'
+			= f.text_field :phonics, class: 'form-control'
+		div.form-group
+			= f.label 'Definition'
+			= f.text_field :definition, class: 'form-control'
+		div.form-group
+			= f.label 'Example'
+			= f.text_field :example, class: 'form-control'
+		div.form-group
+			= f.submit '保存', class: 'btn btn-primary'
