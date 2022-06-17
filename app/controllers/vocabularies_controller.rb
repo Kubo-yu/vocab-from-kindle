@@ -12,7 +12,7 @@ class VocabulariesController < ApplicationController
   end
 
   def update
-		@vocabulary = Vocabulary.find(params[:id])
+    @vocabulary = Vocabulary.find(params[:id])
     if @vocabulary.update!(vocabulary_params)
       redirect_to vocabularies_path, notice: '保存に成功しました'
     else
@@ -25,7 +25,7 @@ class VocabulariesController < ApplicationController
     @vocabularies = Vocabulary.where(book_id: @book.id)
   end
 
-	private
+  private
 
   def vocabulary_params
     params.require(:vocabular).permit(:word, :phonics, :definition, :example)
