@@ -20,7 +20,8 @@ module Import
           example = rows[0][3]
           word_or_words = rows[1][3]
           # ただのnoteであればスキップ
-					next if word_or_words.match?(/^note/)
+          next if word_or_words.match?(/^note/)
+
           # 1つのexampleに対して、2つ以上のwordの場合
           if word_or_words.match?(/s*,\ss*/)
             words = word_or_words.split(/s*,\ss*/)
