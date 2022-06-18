@@ -16,10 +16,10 @@ class Vocabulary < ApplicationRecord
   belongs_to :book
 
   def self.vocab_not_scraped?(book)
-    Vocabulary.where(book_id: book.id, definition: nil).count
+    Vocabulary.where(book_id: book.id, definition: [nil, '']).count
   end
 
-  def self.count_done(_book)
-    Vocabulary.where.not(definition: nil).count
+  def self.count_done(book)
+    Vocabulary.where(book_id: book.id).where.not(definition: [nil, '']).count
   end
 end
