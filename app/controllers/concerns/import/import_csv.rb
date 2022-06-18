@@ -4,7 +4,7 @@ module Import
   class ImportCsv
     def self.import(file)  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       vocabulary_rows = 4
-      # ここでcsvのimportロジックは終了しているから、以降はprivateメソッドに切り出したほうがいいかも。。
+      # ここでcsvのimport本来の機能は終了しているから、以降はprivateメソッドに切り出したほうがいいかも。。
       csv = CSV.read(file.path, liberal_parsing: true)
 
       # book、author作成
@@ -19,7 +19,9 @@ module Import
         if index >= vocabulary_rows
           example = rows[0][3]
           word_or_words = rows[1][3]
-          # 既にimport済みであればスキップ
+          # ただのnoteであればスキップ
+          next if word_or_words.match?(/^note/)
+
           # 1つのexampleに対して、2つ以上のwordの場合
           if word_or_words.match?(/s*,\ss*/)
             words = word_or_words.split(/s*,\ss*/)
