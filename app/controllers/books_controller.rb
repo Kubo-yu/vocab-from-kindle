@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   include Import
 
   def index
-    @books = Book.all
+    @books = Book.all.order(id: "DESC")
   end
 
   def create; end
