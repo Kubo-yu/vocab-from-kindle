@@ -1,6 +1,6 @@
 class VocabulariesController < ApplicationController
   def index
-    @vocabularies = Vocabulary.all
+    @vocabularies = Vocabulary.all.order(id: "DESC")
   end
 
   def create; end
@@ -22,7 +22,7 @@ class VocabulariesController < ApplicationController
 
   def book_vocab
     @book = Book.find(params[:book])
-    @vocabularies = Vocabulary.where(book_id: @book.id)
+    @vocabularies = Vocabulary.where(book_id: @book.id).order(id: "DESC")
   end
 
   private
