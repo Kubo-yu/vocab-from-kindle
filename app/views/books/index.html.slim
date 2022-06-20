@@ -17,6 +17,8 @@ table.table
       th Wating
       th Done
       th Scrape
+      th Export
+      th Exported
   tbody
     - @books.each do |book|
       tr
@@ -27,3 +29,5 @@ table.table
         td = Vocabulary.vocab_not_scraped?(book)
         td = Vocabulary.count_done(book)
         td = button_to 'Start Scrape', scrape_books_path, method: :post, params: {book_id: book.id}, class: 'btn btn-success'
+        td = button_to 'Export CSV', export_books_path(format: :csv), method: :get, params: {book_id: book}, class: 'btn btn-success'
+        td = Vocabulary.count_exported(book)
