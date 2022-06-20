@@ -68,7 +68,7 @@ class ScrapeVocab < ApplicationJob
     [definition, phonics]
   end
 
-	def driver_access
+  def driver_access
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
     options.add_argument("--no-sandbox")
@@ -76,13 +76,13 @@ class ScrapeVocab < ApplicationJob
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--remote-debugging-port=9222')
     options.add_argument('--window-size=800,500')
-		options.add_argument('--disable-extensions')
-		options.add_argument('--ignore-certificate-errors')
-		options.add_argument('--disable-web-security')
-		options.add_argument('--disable-desktop-notifications')
-		options.add_argument('--blink-settings=imagesEnabled=false')
-		options.add_argument('--proxy-server="direct://"')
-		options.add_argument('--proxy-bypass-list=*')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--disable-web-security')
+    options.add_argument('--disable-desktop-notifications')
+    options.add_argument('--blink-settings=imagesEnabled=false')
+    options.add_argument('--proxy-server="direct://"')
+    options.add_argument('--proxy-bypass-list=*')
 
     Selenium::WebDriver.for :chrome, options: options
   end
