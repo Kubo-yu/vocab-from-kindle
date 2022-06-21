@@ -86,3 +86,5 @@ gem 'dotenv-rails'
 gem 'aasm'
 
 gem 'roo'
+
+gem 'kaminari'
