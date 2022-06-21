@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   include Import
 
   def index
-    @books = Book.all.order(id: "DESC")
+    @books = Book.all.page(params[:page])
   end
 
   def create; end
