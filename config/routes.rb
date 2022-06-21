@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :books do
     collection do
       post :import
+      get :export
       post :scrape
     end
   end

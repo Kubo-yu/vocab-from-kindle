@@ -1,6 +1,6 @@
 class VocabulariesController < ApplicationController
   def index
-    @vocabularies = Vocabulary.all.order(id: "DESC")
+    @vocabularies = Kaminari.paginate_array(Vocabulary.all.order(id: "DESC")).page(params[:page])
   end
 
   def create; end
@@ -22,7 +22,7 @@ class VocabulariesController < ApplicationController
 
   def book_vocab
     @book = Book.find(params[:book])
-    @vocabularies = Vocabulary.where(book_id: @book.id).order(id: "DESC")
+    @vocabularies = Kaminari.paginate_array(Vocabulary.where(book_id: @book.id).order(id: "DESC")).page(params[:page])
   end
 
   private
