@@ -25,7 +25,7 @@ table.table
         td = book.id
         td = book.title
         td = Book.book_author?(book)
-        td = link_to "#{book.vocabulary_quantity}", book_vocab_vocabularies_path(book: book), {class: "text-decoration-none"}
+        td = link_to "#{Book.vocabulary_quantity?(book)}", book_vocab_vocabularies_path(book: book), {class: "text-decoration-none"}
         td = Vocabulary.vocab_not_scraped?(book)
         td = Vocabulary.count_done(book)
         td = button_to 'Start Scrape', scrape_books_path, method: :post, params: {book_id: book.id}, class: 'btn btn-success'

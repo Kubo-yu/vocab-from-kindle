@@ -4,7 +4,6 @@
 
 # id													:bigint
 # title: 											:text
-# vocabulary_quantity: 				:integer
 # created_at: 								:datatime
 # updated_at: 								:datatime
 
@@ -27,5 +26,9 @@ class Book < ApplicationRecord
     author_book = AuthorBook.find_by(book_id: book.id)
     author = Author.find(author_book.author_id)
     author.name
+  end
+
+  def self.vocabulary_quantity?(book)
+    Vocabulary.where(book_id: book.id).count
   end
 end
