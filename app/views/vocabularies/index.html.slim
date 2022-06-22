@@ -9,6 +9,7 @@ table.table
 			th Definition
 			th Example
 			th Edit
+			th Delete
   tbody
     - @vocabularies.each do |vocabulary|
       tr
@@ -17,5 +18,6 @@ table.table
         td = emphasize_not_found(vocabulary.phonics)
         td = emphasize_not_found(vocabulary.definition)
         td = vocabulary.example
-        td = button_to 'Edit', edit_vocabulary_path(vocabulary), method: :get, params: { vocabulary: vocabulary }, class: 'btn btn-success'
+        td = button_to 'Edit', edit_vocabulary_path(vocabulary), method: :get, class: 'btn btn-success'
+        td = button_to 'Delete', vocabulary_path(vocabulary), { method: :delete, data: {confirm: "Vocabularyを削除します。よろしいですか？"}, class: 'btn btn-danger' }
 = paginate @vocabularies
