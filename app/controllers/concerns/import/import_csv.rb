@@ -46,8 +46,6 @@ module Import
           end
         end
       end
-      vocabulary_quantity = Vocabulary.where(book_id: book.id).count
-      book.update!(vocabulary_quantity: vocabulary_quantity)
     end
   end
 end
