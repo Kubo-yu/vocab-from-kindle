@@ -40,11 +40,11 @@ class ScrapeVocab < ApplicationJob
     search_button = driver.find_element(:class_name, 'formButton')
     word_input = driver.find_element(:class_name, 'formBoxITxt')
     word = vocabulary.word
+    sleep 1
     puts "6 #{word}"
     word_input.send_keys(word)
     sleep 1
     search_button.click
-    sleep 1
   end
 
   def get_definition_and_phonics(driver, vocabulary)

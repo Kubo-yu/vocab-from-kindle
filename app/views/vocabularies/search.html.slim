@@ -23,7 +23,7 @@ table.table
 			th Edit
 			th Delete
   tbody
-    - @vocabularies.each do |vocabulary|
+    - @result.each do |vocabulary|
       tr
         td = link_to "#{Book.book_title?(vocabulary.book_id)}", book_vocab_vocabularies_path(book: vocabulary.book_id), {class: "text-decoration-none"}
         td = vocabulary.word
@@ -32,4 +32,4 @@ table.table
         td = vocabulary.example
         td = button_to 'Edit', edit_vocabulary_path(vocabulary), method: :get, class: 'btn btn-success'
         td = button_to 'Delete', vocabulary_path(vocabulary), { method: :delete, data: {confirm: "Vocabularyを削除します。よろしいですか？"}, class: 'btn btn-danger' }
-= paginate @vocabularies
+= paginate @result

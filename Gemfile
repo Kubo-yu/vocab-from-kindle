@@ -88,3 +88,5 @@ gem 'aasm'
 gem 'roo'
 
 gem 'kaminari'
+
+gem 'ransack'
