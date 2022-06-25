@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :vocabularies do
     collection do
       get :book_vocab
+      get :search
     end
   end
 
