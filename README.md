@@ -1,24 +1,34 @@
-# README
+## 概要
+---
+Kindleで洋書を読んでいるときに、意味のわからない単語をその一文とともに、ハイライトに保存。
+<br>
+それらの意味とフォニックス(発音記号)を自動取得して
+、Ankiで一括読み込みができるようにCSV形式で出力するサイト。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<br>
 
-Things you may want to cover:
+## できること
+---
+* Kindleからエクスポートした単語、例文の読み込み、保存
+* 保存した単語の意味とフォニックスの取得
+* 単語や意味のエクスポート
 
-* Ruby version
+<br>
 
-* System dependencies
+## 使い方
+---
+Kindleでハイライトに意味のわからない単語が含まれる文、メモに保存したい単語を追加。
+必ず以下の形式で保存。
+* ハイライト→例文
+* メモ→単語
 
-* Configuration
+単にハイライトしたい場合や、何かメモしたい場合は、メモにnoteという文字を入れる。
 
-* Database creation
+例文に保存したい単語が二文字以上含まれる場合は、カンマと半角スペースで区切る。
 
-* Database initialization
 
-* How to run the test suite
+KindleからCSVファイルをエクスポートして、そのファイルをサイト上のインポートで読み込む。
 
-* Services (job queues, cache servers, search engines, etc.)
+Start Scrapeボタンでスクレイピングを開始。Weblioのサイトから意味とフォニックスを取得。
 
-* Deployment instructions
-
-* ...
+Export CSVボタンで意味を取得できている単語をCSV形式でダウンロード。
